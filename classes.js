@@ -12,9 +12,6 @@ class Manager extends Employee {
         super(type, name, ID, email)
         this.phoneNumber = phoneNumber;
     }
-    showManager() {
-        console.log(`The ${this.type}'s employee ID is ${this.ID}, their name is ${this.name}, and their phone number is ${this.phoneNumber}`); 
-    }
 }
 
 

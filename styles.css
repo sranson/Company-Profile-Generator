@@ -1,0 +1,32 @@
+
+
+.headerClass {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+}
+
+.headerText {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    color: white;
+}
+
+
+.CardSection {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.addPadding {
+    padding-top: 5%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 6%;
+}
+
+.cardHeader {
+    background-color: blue;
+    color: white;
+}

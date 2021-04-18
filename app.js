@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { Employee, Manager, Engineer, Intern } = require('./classes');
+const { Manager, Engineer, Intern } = require('./classes');
 
 
 const getManagerInfo = function() {
@@ -46,7 +46,7 @@ const getManagerInfo = function() {
             type: 'list',
             name: 'employeeType',
             message: 'Would you like to add an employee?',
-            choices: ['Engineer', 'Intern', 'I do not want to add an employee']
+            choices: ['Engineer', 'Intern', 'I am finished Building my Team']
         }
     ]).then(data => {
         employeeType = data.employeeType
@@ -120,8 +120,7 @@ const getManagerInfo = function() {
               console.log('Something else went wrong');
             }
           });
-        }
-     
+  }
 
 
   getManagerInfo();

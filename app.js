@@ -1,8 +1,7 @@
 var inquirer = require('inquirer');
 
-
-inquirer
-  .prompt([
+const getManagerInfo = function() {
+    inquirer.prompt([
     {
         type: 'Input',
         name: 'managerName',
@@ -23,14 +22,9 @@ inquirer
         name: 'managerOfficeNumber',
         message: 'What is the manager\'s office number?'
     },
-    {
-        type: 'list',
-        name: 'addEmployee',
-        choices: ['Engineer', 'Intern', 'I do not want to add an employee']
-    }
   ])
   .then(answers => {
-    getManagerInfo(answers)
+    addEmployeeMenu();
   })
   .catch(error => {
     if(error.isTtyError) {
@@ -41,13 +35,73 @@ inquirer
       console.log('Something else went wrong');
     }
   });
+}
 
-  const getManagerInfo = function(answers) {
-      if (answers.addEmployee === 'Engineer') {
-          console.log('The manager wants to add an Engineer');
-      } else if (answers.addEmployee === 'Intern') {
-         console.log('The manager wants to add an Intern');
-      } else {
-          console.log('The manager does not want to add another employee');
-      }
-  }
+ const addEmployeeMenu = function() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'addEmployee',
+            message: 'Would you like to add an employee?',
+            choices: ['Engineer', 'Intern', 'I do not want to add an employee']
+        }
+    ]).then(data => {
+        if (data.addEmployee === 'Engineer') {
+            getEngineerInfo();
+        } else if (data.addEmployee === 'Inter') {
+            console.log('The manager wants to add an Intern');
+        } else {
+            console.log('The manager does NOT want to add additional employees');
+        }
+      })
+      .catch(error => {
+        if(error.isTtyError) {
+          // Prompt couldn't be rendered in the current environment
+          console.log(error);
+        } else {
+          // Something else went wrong
+          console.log('Something else went wrong');
+        }
+      });
+ }
+
+  const getEngineerInfo = function() {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'engName',
+                message: 'What is the engineer\'s name?'
+            },
+            {
+                type: 'input',
+                name: 'engID',
+                message: 'What is the engineer\'s employee ID?'
+            },
+            {
+                type: 'input',
+                name: 'engEmail',
+                message: 'What is the engineer\'s email address?',
+            },
+            {
+                type: 'input',
+                name: 'engUsername',
+                message: 'What is the engineer\'s GitHub Username?'
+            }
+        ]).then(answers => {
+            addEmployeeMenu()
+          })
+          .catch(error => {
+            if(error.isTtyError) {
+              // Prompt couldn't be rendered in the current environment
+              console.log(error);
+            } else {
+              // Something else went wrong
+              console.log('Something else went wrong');
+            }
+          });
+        }
+     
+
+
+
+  getManagerInfo();

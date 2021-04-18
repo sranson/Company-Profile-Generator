@@ -1,33 +1,5 @@
-var inquirer = require('inquirer');
-
-class Employee {
-    constructor(type, name, ID, email) {
-        this.type = type;
-        this.name = name;
-        this.ID = ID;
-        this.email = email;
-    }
-}
-
-class Engineer extends Employee {
-    constructor(type, name, ID, email, github) {
-        super(type, name, ID, email);
-        this.github = github;
-    }
-    showEngineer() {
-        console.log(`The ${this.type}'s name is ${this.name}. Their email address is ${this.email} and their GitHub username is ${this.github}`);
-    }
-}
-
-class Intern extends Employee {
-    constructor(type, name, ID, email, school) {
-        super(type, name, ID, email);
-        this.school = school;
-    }
-    showIntern() {
-        console.log(`The ${this.type}'s name is ${this.name}. Their email address is ${this.email} and they attend ${this.school}`);
-    }
-}
+const inquirer = require('inquirer');
+const { Employee, Engineer, Intern } = require('./classes');
 
 
 const getManagerInfo = function() {
@@ -58,10 +30,8 @@ const getManagerInfo = function() {
   })
   .catch(error => {
     if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
       console.log(error);
     } else {
-      // Something else went wrong
       console.log('Something else went wrong');
     }
   });
@@ -85,10 +55,8 @@ const getManagerInfo = function() {
       })
       .catch(error => {
         if(error.isTtyError) {
-          // Prompt couldn't be rendered in the current environment
           console.log(error);
         } else {
-          // Something else went wrong
           console.log('Something else went wrong');
         }
       });
@@ -139,12 +107,10 @@ const getManagerInfo = function() {
                         employee.showIntern();
                         addEmployeeMenu()
                     })
-                    // Pass the employee object to the Intern class
                 }
           })
           .catch(error => {
             if(error.isTtyError) {
-              // Prompt couldn't be rendered in the current environment
               console.log(error);
             } else {
               // Something else went wrong

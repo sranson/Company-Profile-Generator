@@ -1,5 +1,21 @@
 var inquirer = require('inquirer');
 
+class Employee {
+    constructor(type, name, ID, email) {
+        this.type = type;
+        this.name = name;
+        this.ID = ID;
+        this.email = email;
+    }
+    employeeDetails() {
+        console.log(`Employee Type: ${this.type}`);
+        console.log(`Employee Name: ${this.name}`);
+        console.log(`Employee ID: ${this.ID}`);
+        console.log(`Employee Email: ${this.email}`);
+    }
+}
+
+
 const getManagerInfo = function() {
     inquirer.prompt([
     {
@@ -47,7 +63,7 @@ const getManagerInfo = function() {
         }
     ]).then(data => {
         if (data.addEmployee === 'Engineer') {
-            getEngineerInfo();
+            getEmployeeInfo();
         } else if (data.addEmployee === 'Inter') {
             console.log('The manager wants to add an Intern');
         } else {
@@ -65,29 +81,28 @@ const getManagerInfo = function() {
       });
  }
 
-  const getEngineerInfo = function() {
+  const getEmployeeInfo = function() {
         inquirer.prompt([
             {
                 type: 'input',
-                name: 'engName',
+                name: 'employeeName',
                 message: 'What is the engineer\'s name?'
             },
             {
                 type: 'input',
-                name: 'engID',
+                name: 'employeeID',
                 message: 'What is the engineer\'s employee ID?'
             },
             {
                 type: 'input',
-                name: 'engEmail',
+                name: 'employeeEmail',
                 message: 'What is the engineer\'s email address?',
             },
-            {
-                type: 'input',
-                name: 'engUsername',
-                message: 'What is the engineer\'s GitHub Username?'
-            }
         ]).then(answers => {
+            const {employeeName, employeeID, employeeEmail} = answers;
+            let employee = new Employee('Engineer', employeeName, employeeID, employeeEmail);
+            console.log(employee);
+            // Show the user the main menu
             addEmployeeMenu()
           })
           .catch(error => {

@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 const { Manager, Engineer, Intern } = require('./classes');
 
 
@@ -28,7 +29,8 @@ const getManagerInfo = function() {
   .then(answers => {
     const {managerName, managerID, managerEmail, managerOfficeNumber } = answers;
     let manager = new Manager('Manager', managerName, managerID, managerEmail, managerOfficeNumber);  
-    manager.showManager();
+    manager.addHTML('Manager', manager.name, manager.ID, manager.email, manager.phoneNumber)
+    // console.log(manager.name, manager.ID, manager.email, manager.phoneNumber)
     addEmployeeMenu()
   })
   .catch(error => {
@@ -39,6 +41,7 @@ const getManagerInfo = function() {
     }
   });
 }
+
 
  const addEmployeeMenu = function() {
     inquirer.prompt([
@@ -121,6 +124,8 @@ const getManagerInfo = function() {
             }
           });
   }
+
+
 
 
   getManagerInfo();

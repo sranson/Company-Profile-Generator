@@ -63,9 +63,11 @@ const getManagerInfo = function() {
         }
     ]).then(data => {
         if (data.addEmployee === 'Engineer') {
-            getEmployeeInfo();
-        } else if (data.addEmployee === 'Inter') {
-            console.log('The manager wants to add an Intern');
+            employeeType = 'Engineer';
+            getEmployeeInfo(employeeType);
+        } else if (data.addEmployee === 'Intern') {
+            employeeType = 'Intern';
+            getEmployeeInfo(employeeType);
         } else {
             console.log('The manager does NOT want to add additional employees');
         }
@@ -81,26 +83,27 @@ const getManagerInfo = function() {
       });
  }
 
-  const getEmployeeInfo = function() {
+  const getEmployeeInfo = function(employeeType) {
+    //   console.log(`Employee Type: ${employeeType}`);
         inquirer.prompt([
             {
                 type: 'input',
                 name: 'employeeName',
-                message: 'What is the engineer\'s name?'
+                message: 'What is the employee\'s name?'
             },
             {
                 type: 'input',
                 name: 'employeeID',
-                message: 'What is the engineer\'s employee ID?'
+                message: 'What is the employee\'s employee ID?'
             },
             {
                 type: 'input',
                 name: 'employeeEmail',
-                message: 'What is the engineer\'s email address?',
+                message: 'What is the employee\'s email address?',
             },
-        ]).then(answers => {
+        ]).then(function (answers) {
             const {employeeName, employeeID, employeeEmail} = answers;
-            let employee = new Employee('Engineer', employeeName, employeeID, employeeEmail);
+            let employee = new Employee(employeeType, employeeName, employeeID, employeeEmail);
             console.log(employee);
             // Show the user the main menu
             addEmployeeMenu()

@@ -15,11 +15,11 @@ class Manager extends Employee {
         this.phoneNumber = phoneNumber;
     }
     addHTML(type, name, ID, email, phoneNumber) {
-        const htmlPageContent = generateHTML(type, name, ID, email, phoneNumber)
+        const htmlPageContent = createHTML(type, name, ID, email, phoneNumber)
 
         fs.writeFile('index.html', htmlPageContent, (err) =>
-        err ? console.log(err) : console.log('Successfully created index.html!')
-    );
+             err ? console.log(err) : console.log('Successfully added to index.html!')
+        );
     }
 }
 
@@ -29,9 +29,14 @@ class Engineer extends Employee {
         super(type, name, ID, email);
         this.github = github;
     }
-    showEngineer() {
-        console.log(`The ${this.type}'s employee ID is ${this.ID}, their name is ${this.name}, their email address is ${this.email}, and their GitHub username is ${this.github}`);
+    addHTML(type, name, ID, email, github) {
+        const htmlEngrContent = addToHTML(type, name, ID, email, github)
+
+        fs.appendFile('index.html', htmlEngrContent, (err) =>
+        err ? console.log(err) : console.log('Successfully added to index.html!')
+   );
     }
+
 }
 
 
@@ -47,9 +52,28 @@ class Intern extends Employee {
 }
 
 
-function generateHTML(type, name, ID, email, phoneNumber) {
-    return `
-        <!DOCTYPE html>
+function createHTML(type, name, ID, email, variable) {
+    console.log(`The card type should be for: ${type}`);
+
+    let managerCard = `
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body cardHeader">
+                <h5 class="card-title">${name}</h5>
+                <h5>${type}</h5>
+            </div>
+            <div class="addPadding">
+                <ul class="list-group">
+                    <li class="list-group-item">ID: ${ID}</li>
+                        <li class="list-group-item">Email: ${email}</li>
+                        <li class="list-group-item">Office number: ${variable}</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    `
+    let initialHTMLpg = `
+    <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -69,37 +93,58 @@ function generateHTML(type, name, ID, email, phoneNumber) {
         
             <!------------------------------------------------ TOP CARD ROW ------------------------------------------>
             <div id="cardSection" class="CardSection">
-                <div class="col-md-3">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body cardHeader">
-                            <h5 class="card-title">${name}</h5>
-                            <h5>${type}</h5>
-                        </div>
-                        <div class="addPadding">
-                            <ul class="list-group">
-                                <li class="list-group-item">ID: ${ID}</li>
-                                <li class="list-group-item">Email: ${email}</li>
-                                <li class="list-group-item">Office number: ${phoneNumber}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-        
+                    <!-- APPEND CARD TO THIS SECTION -->
+                    ${managerCard}
             </div>
-            <!------------------------------------------------ TOP CARD ROW ------------------------------------------>
-        
-            <!------------------------------------------------ BOTTOM CARD ROW ------------------------------------------>
-        
-            <div class="CardSection hide">
-
-            </div>
-        
-        <!------------------------------------------------ BOTTOM CARD ROW ------------------------------------------>
-        </body>
-        
         </html>
+    </body>
+`
+
+return initialHTMLpg;
+}
+
+
+function addToHTML (type, name, ID, email, variable) {
+
+    let engineerCard = `
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body cardHeader">
+                <h5 class="card-title">${name}</h5>
+                <h5>${type}</h5>
+            </div>
+            <div class="addPadding">
+                <ul class="list-group">
+                    <li class="list-group-item">ID: ${ID}</li>
+                        <li class="list-group-item">Email: ${email}</li>
+                        <li class="list-group-item">GitHub: ${variable}</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
     `
-      }
+
+    let internCard = `
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body cardHeader">
+                <h5 class="card-title">${name}</h5>
+                <h5>${type}</h5>
+            </div>
+            <div class="addPadding">
+                <ul class="list-group">
+                    <li class="list-group-item">ID: ${ID}</li>
+                        <li class="list-group-item">Email: ${email}</li>
+                        <li class="list-group-item">School: ${variable}</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    `
+    return engineerCard;
+}
+
+
 
 module.exports = {
     Employee,

@@ -96,8 +96,8 @@ const getManagerInfo = function() {
                         },
                     ]).then(function(data) {
                         userName = data.userName;
-                        let employee = new Engineer(employeeType, employeeName, employeeID, employeeEmail, userName);  
-                        employee.showEngineer();
+                        let engineer = new Engineer(employeeType, employeeName, employeeID, employeeEmail, userName);  
+                        engineer.addHTML('Engineer', engineer.name, engineer.ID, engineer.email, userName);
                         addEmployeeMenu()
                     })
                 } else if (employeeType === 'Intern') {
@@ -110,7 +110,7 @@ const getManagerInfo = function() {
                     ]).then(function(data) {
                         schoolName = data.schoolName;
                         let employee = new Intern(employeeType, employeeName, employeeID, employeeEmail, schoolName);  
-                        employee.showIntern();
+                        employee.addHTML();
                         addEmployeeMenu()
                     })
                 }

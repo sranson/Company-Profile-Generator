@@ -7,11 +7,25 @@ class Employee {
         this.ID = ID;
         this.email = email;
     }
-    employeeDetails() {
-        console.log(`Employee Type: ${this.type}`);
-        console.log(`Employee Name: ${this.name}`);
-        console.log(`Employee ID: ${this.ID}`);
-        console.log(`Employee Email: ${this.email}`);
+}
+
+class Engineer extends Employee {
+    constructor(type, name, ID, email, github) {
+        super(type, name, ID, email);
+        this.github = github;
+    }
+    showEngineer() {
+        console.log(`The ${this.type}'s name is ${this.name}. Their email address is ${this.email} and their GitHub username is ${this.github}`);
+    }
+}
+
+class Intern extends Employee {
+    constructor(type, name, ID, email, school) {
+        super(type, name, ID, email);
+        this.school = school;
+    }
+    showIntern() {
+        console.log(`The ${this.type}'s name is ${this.name}. Their email address is ${this.email} and they attend ${this.school}`);
     }
 }
 
@@ -57,19 +71,16 @@ const getManagerInfo = function() {
     inquirer.prompt([
         {
             type: 'list',
-            name: 'addEmployee',
+            name: 'employeeType',
             message: 'Would you like to add an employee?',
             choices: ['Engineer', 'Intern', 'I do not want to add an employee']
         }
     ]).then(data => {
-        if (data.addEmployee === 'Engineer') {
-            employeeType = 'Engineer';
-            getEmployeeInfo(employeeType);
-        } else if (data.addEmployee === 'Intern') {
-            employeeType = 'Intern';
+        employeeType = data.employeeType
+        if (employeeType === 'Engineer' || employeeType === 'Intern') {
             getEmployeeInfo(employeeType);
         } else {
-            console.log('The manager does NOT want to add additional employees');
+            console.log(`The manager does NOT want to add an additional employee`);
         }
       })
       .catch(error => {
@@ -84,29 +95,41 @@ const getManagerInfo = function() {
  }
 
   const getEmployeeInfo = function(employeeType) {
-    //   console.log(`Employee Type: ${employeeType}`);
         inquirer.prompt([
             {
                 type: 'input',
                 name: 'employeeName',
-                message: 'What is the employee\'s name?'
+                message: `What is the ${employeeType}\'s name?`
             },
             {
                 type: 'input',
                 name: 'employeeID',
-                message: 'What is the employee\'s employee ID?'
+                message: `What is the ${employeeType}\'s employee ID?`
             },
             {
                 type: 'input',
                 name: 'employeeEmail',
-                message: 'What is the employee\'s email address?',
+                message: `What is the ${employeeType}\'s email address?`,
             },
         ]).then(function (answers) {
             const {employeeName, employeeID, employeeEmail} = answers;
-            let employee = new Employee(employeeType, employeeName, employeeID, employeeEmail);
-            console.log(employee);
-            // Show the user the main menu
-            addEmployeeMenu()
+                if (employeeType === 'Engineer') {
+                    inquirer.prompt([
+                        {
+                            type: 'input',
+                            name: 'userName',
+                            message: 'What is the Engineer\'s GitHub username?'
+                        },
+                    ]).then(function(data) {
+                        userName = data.userName;
+                        let employee = new Engineer(employeeType, employeeName, employeeID, employeeEmail, userName);  
+                        console.log(employee);
+                        addEmployeeMenu()
+                    })
+                } else if (employeeType === 'Intern') {
+                    // Get the school name
+                    // Pass the employee object to the Intern class
+                }
           })
           .catch(error => {
             if(error.isTtyError) {
@@ -119,6 +142,19 @@ const getManagerInfo = function() {
           });
         }
      
+
+    // const EngrUsername = function() {
+    //     inquirer.prompt([
+    //         {
+    //             type: 'input',
+    //             name: 'userName',
+    //             message: 'What is the employee\'s GitHub username?'
+    //         },
+    //     ]).then(function() {
+    //         return userName;
+    //     })
+    //     // Pass the employee object to the Employee class
+    // }    
 
 
 

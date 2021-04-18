@@ -7,6 +7,16 @@ class Employee {
     }
 }
 
+class Manager extends Employee {
+    constructor(type, name, ID, email, phoneNumber) {
+        super(type, name, ID, email)
+        this.phoneNumber = phoneNumber;
+    }
+    showManager() {
+        console.log(`The ${this.type}'s employee ID is ${this.ID}, their name is ${this.name}, and their phone number is ${this.phoneNumber}`); 
+    }
+}
+
 
 class Engineer extends Employee {
     constructor(type, name, ID, email, github) {
@@ -33,6 +43,7 @@ class Intern extends Employee {
 
 module.exports = {
     Employee,
+    Manager,
     Engineer,
     Intern
 };

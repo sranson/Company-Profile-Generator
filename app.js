@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { Employee, Engineer, Intern } = require('./classes');
+const { Employee, Manager, Engineer, Intern } = require('./classes');
 
 
 const getManagerInfo = function() {
@@ -26,7 +26,10 @@ const getManagerInfo = function() {
     },
   ])
   .then(answers => {
-    addEmployeeMenu();
+    const {managerName, managerID, managerEmail, managerOfficeNumber } = answers;
+    let manager = new Manager('Manager', managerName, managerID, managerEmail, managerOfficeNumber);  
+    manager.showManager();
+    addEmployeeMenu()
   })
   .catch(error => {
     if(error.isTtyError) {

@@ -123,7 +123,7 @@ const getManagerInfo = function() {
                     ]).then(function(data) {
                         userName = data.userName;
                         let employee = new Engineer(employeeType, employeeName, employeeID, employeeEmail, userName);  
-                        console.log(employee);
+                        employee.showEngineer();
                         addEmployeeMenu()
                     })
                 } else if (employeeType === 'Intern') {
@@ -136,7 +136,7 @@ const getManagerInfo = function() {
                     ]).then(function(data) {
                         schoolName = data.schoolName;
                         let employee = new Intern(employeeType, employeeName, employeeID, employeeEmail, schoolName);  
-                        console.log(employee);
+                        employee.showIntern();
                         addEmployeeMenu()
                     })
                     // Pass the employee object to the Intern class

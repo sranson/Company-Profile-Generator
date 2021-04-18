@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+
+
 class Employee {
     constructor(type, name, ID, email) {
         this.type = type;
@@ -8,6 +10,8 @@ class Employee {
         this.email = email;
     }
 }
+
+
 
 class Manager extends Employee {
     constructor(type, name, ID, email, phoneNumber) {
@@ -24,19 +28,20 @@ class Manager extends Employee {
 }
 
 
+
+
 class Engineer extends Employee {
     constructor(type, name, ID, email, github) {
         super(type, name, ID, email);
         this.github = github;
     }
     addHTML(type, name, ID, email, github) {
-        const htmlEngrContent = addToHTML(type, name, ID, email, github)
+        const htmlEngrContent = addEngineerToHTML(type, name, ID, email, github)
 
         fs.appendFile('index.html', htmlEngrContent, (err) =>
-        err ? console.log(err) : console.log('Successfully added to index.html!')
-   );
+            err ? console.log(err) : console.log('Successfully added to index.html!')
+        );
     }
-
 }
 
 
@@ -46,8 +51,12 @@ class Intern extends Employee {
         super(type, name, ID, email);
         this.school = school;
     }
-    showIntern() {
-        console.log(`The ${this.type}'s employee ID is ${this.ID}, their name is ${this.name}, their email address is ${this.email}, and they attend ${this.school}`);
+    addHTML(type, name, ID, email, school) {
+        const htmlInternContent = addInternToHTML(type, name, ID, email, school)
+
+        fs.appendFile('index.html', htmlInternContent, (err) =>
+            err ? console.log(err) : console.log('Successfully added to index.html!')
+        );
     }
 }
 
@@ -56,7 +65,7 @@ function createHTML(type, name, ID, email, variable) {
     console.log(`The card type should be for: ${type}`);
 
     let managerCard = `
-    <div class="col-md-3">
+    <div class="col-md-3" id="card1>
         <div class="card" style="width: 18rem;">
             <div class="card-body cardHeader">
                 <h5 class="card-title">${name}</h5>
@@ -104,8 +113,7 @@ return initialHTMLpg;
 }
 
 
-function addToHTML (type, name, ID, email, variable) {
-
+function addEngineerToHTML (type, name, ID, email, variable) {
     let engineerCard = `
     <div class="col-md-3">
         <div class="card" style="width: 18rem;">
@@ -123,7 +131,10 @@ function addToHTML (type, name, ID, email, variable) {
         </div>
     </div>
     `
+    return engineerCard;
+}
 
+function addInternToHTML (type, name, ID, email, variable) {
     let internCard = `
     <div class="col-md-3">
         <div class="card" style="width: 18rem;">
@@ -141,7 +152,7 @@ function addToHTML (type, name, ID, email, variable) {
         </div>
     </div>
     `
-    return engineerCard;
+    return internCard;
 }
 
 

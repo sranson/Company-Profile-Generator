@@ -109,8 +109,8 @@ const getManagerInfo = function() {
                         },
                     ]).then(function(data) {
                         schoolName = data.schoolName;
-                        let employee = new Intern(employeeType, employeeName, employeeID, employeeEmail, schoolName);  
-                        employee.addHTML();
+                        let intern = new Intern(employeeType, employeeName, employeeID, employeeEmail, schoolName);  
+                        intern.addHTML('Intern', intern.name, intern.ID, intern.email, schoolName );
                         addEmployeeMenu()
                     })
                 }

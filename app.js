@@ -127,7 +127,18 @@ const getManagerInfo = function() {
                         addEmployeeMenu()
                     })
                 } else if (employeeType === 'Intern') {
-                    // Get the school name
+                    inquirer.prompt([
+                        {
+                            type: 'input',
+                            name: 'schoolName',
+                            message: 'What is the name of the Intern\'s school?'
+                        },
+                    ]).then(function(data) {
+                        schoolName = data.schoolName;
+                        let employee = new Intern(employeeType, employeeName, employeeID, employeeEmail, schoolName);  
+                        console.log(employee);
+                        addEmployeeMenu()
+                    })
                     // Pass the employee object to the Intern class
                 }
           })
@@ -142,20 +153,6 @@ const getManagerInfo = function() {
           });
         }
      
-
-    // const EngrUsername = function() {
-    //     inquirer.prompt([
-    //         {
-    //             type: 'input',
-    //             name: 'userName',
-    //             message: 'What is the employee\'s GitHub username?'
-    //         },
-    //     ]).then(function() {
-    //         return userName;
-    //     })
-    //     // Pass the employee object to the Employee class
-    // }    
-
 
 
   getManagerInfo();

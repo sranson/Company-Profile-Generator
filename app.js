@@ -145,7 +145,9 @@ const getManagerInfo = function() {
         myVar = element.phoneNumber
       } else if (element.github) {
         label = 'GitHub'
-        myVar = element.github
+        ghName = element.github
+        myVar = `<a href="https://github.com/${ghName}" target="_blank">${ghName}</a>`
+
       } else if (element.school) {
         label = 'School'
         myVar = element.school
@@ -202,10 +204,3 @@ const getManagerInfo = function() {
   }
 
   getManagerInfo();
-
-
-// WHEN I click on an email address in the HTML
-// THEN my default email program opens and populates the TO field of the email with the address
-
-// WHEN I click on the GitHub username
-// THEN that GitHub profile opens in a new tab

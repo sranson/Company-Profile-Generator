@@ -4,7 +4,7 @@
   "description": "This is a program that accepts user input and generates a profile for each employee.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node app.js"
   },
   "repository": {
@@ -22,5 +22,8 @@
   "homepage": "https://github.com/sranson/Company-Profile-Generator#readme",
   "dependencies": {
     "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }

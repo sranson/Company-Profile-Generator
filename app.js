@@ -145,7 +145,7 @@ const getManagerInfo = function() {
     console.log(`There are ${employeesArray.length} in the Employees Array`);
     employeesArray.forEach(element => {
       if (element.phoneNumber) {
-        label = 'Phone Number';
+        label = 'Phone';
         myVar = element.phoneNumber
       } else if (element.github) {
         label = 'GitHub'
@@ -155,25 +155,27 @@ const getManagerInfo = function() {
         myVar = element.school
       }
       card = `
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-          <div class="card-body cardHeader">
-              <h5 class="card-title">${element.name}</h5>
-              <h5>${element.type}</h5>
-          </div>
-          <div class="addPadding">
-              <ul class="list-group">
-                  <li class="list-group-item">Employee ID: ${element.ID}</li>
+          <div class="col-md-3 mySpacing">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body cardHeader">
+                    <h5 class="card-title">${element.name}</h5>
+                    <h5>${element.type}</h5>
+                </div>
+                <div class="addPadding">
+                  <ul class="list-group">
+                    <li class="list-group-item">Employee ID: ${element.ID}</li>
                       <li class="list-group-item">Email: ${element.email}</li>
                       <li class="list-group-item">${label}: ${myVar}</li>
                   </ul>
+                </div>
+            </div>
           </div>
-      </div>
-  </div>
-        `
+      `
+
+    
     cardsArray.push(card);
     })
-
+    newCardArray = cardsArray.join().replace(/,/g," ")
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -196,7 +198,7 @@ const getManagerInfo = function() {
             <!------------------------------------------------ TOP CARD ROW ------------------------------------------>
             <div id="cardSection" class="CardSection">
                     <!-- APPEND CARD TO THIS SECTION -->
-                ${cardsArray}
+                ${newCardArray}
             </div>
         </body>
       </html>

@@ -33,7 +33,6 @@ const getManagerInfo = function() {
     const {managerName, managerID, managerEmail, managerOfficeNumber } = answers;
     let manager = new Manager('Manager', managerName, managerID, managerEmail, managerOfficeNumber);  
     employeesArray.push(manager);
-    // manager.addHTML('Manager', manager.name, manager.ID, manager.email, manager.phoneNumber)
     addEmployeeMenu()
   })
   .catch(error => {
@@ -102,7 +101,6 @@ const getManagerInfo = function() {
                         userName = data.userName;
                         let engineer = new Engineer(employeeType, employeeName, employeeID, employeeEmail, userName); 
                         employeesArray.push(engineer);
-                        // engineer.addHTML('Engineer', engineer.name, engineer.ID, engineer.email, userName);
                         addEmployeeMenu()
                     })
                 } else if (employeeType === 'Intern') {
@@ -116,7 +114,6 @@ const getManagerInfo = function() {
                         schoolName = data.schoolName;
                         let intern = new Intern(employeeType, employeeName, employeeID, employeeEmail, schoolName); 
                         employeesArray.push(intern); 
-                        // intern.addHTML('Intern', intern.name, intern.ID, intern.email, schoolName );
                         addEmployeeMenu()
                     })
                 }
@@ -136,13 +133,12 @@ const getManagerInfo = function() {
     const htmlPageContent = generateCards(employeesArray)
 
     fs.writeFile('index.html', htmlPageContent, (err) =>
-         err ? console.log(err) : console.log('Successfully added to index.html!')
+         err ? console.log(err) : console.log('Success!')
     );
   }
 
 
   function generateCards(employeesArray) {
-    console.log(`There are ${employeesArray.length} in the Employees Array`);
     employeesArray.forEach(element => {
       if (element.phoneNumber) {
         label = 'Phone';
@@ -164,7 +160,7 @@ const getManagerInfo = function() {
                 <div class="addPadding">
                   <ul class="list-group">
                     <li class="list-group-item">Employee ID: ${element.ID}</li>
-                      <li class="list-group-item">Email: ${element.email}</li>
+                      <li class="list-group-item">Email: <a href = "mailto: ${element.email}">${element.email}</a></li>
                       <li class="list-group-item">${label}: ${myVar}</li>
                   </ul>
                 </div>
@@ -206,3 +202,10 @@ const getManagerInfo = function() {
   }
 
   getManagerInfo();
+
+
+// WHEN I click on an email address in the HTML
+// THEN my default email program opens and populates the TO field of the email with the address
+
+// WHEN I click on the GitHub username
+// THEN that GitHub profile opens in a new tab
